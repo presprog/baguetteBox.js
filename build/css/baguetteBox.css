@@ -1,7 +1,7 @@
 /*!
  * baguetteBox.js
  * @author  feimosi
- * @version 1.5.0
+ * @version %%INJECT_VERSION%%
  * @url https://github.com/feimosi/baguetteBox.js
  */
 #baguetteBox-overlay {
@@ -16,8 +16,8 @@
   z-index: 1000000;
   background-color: #222;
   background-color: rgba(0, 0, 0, 0.8);
-  -webkit-transition: opacity 0.5s ease;
-          transition: opacity 0.5s ease; }
+  -webkit-transition: opacity .5s ease;
+  transition: opacity .5s ease; }
   #baguetteBox-overlay.visible {
     opacity: 1; }
   #baguetteBox-overlay .full-image {
@@ -65,15 +65,16 @@
   height: 100%;
   width: 100%;
   white-space: nowrap;
-  -webkit-transition: left 0.4s ease, -webkit-transform 0.4s ease;
-          transition: left 0.4s ease, -moz-transform 0.4s ease;
-          transition: left 0.4s ease, transform 0.4s ease; }
+  -webkit-transition: left .4s ease, -webkit-transform .4s ease;
+  transition: left .4s ease, -webkit-transform .4s ease;
+  transition: left .4s ease, transform .4s ease;
+  transition: left .4s ease, transform .4s ease, -webkit-transform .4s ease, -moz-transform .4s ease; }
   #baguetteBox-slider.bounce-from-right {
-    -webkit-animation: bounceFromRight 0.4s ease-out;
-            animation: bounceFromRight 0.4s ease-out; }
+    -webkit-animation: bounceFromRight .4s ease-out;
+            animation: bounceFromRight .4s ease-out; }
   #baguetteBox-slider.bounce-from-left {
-    -webkit-animation: bounceFromLeft 0.4s ease-out;
-            animation: bounceFromLeft 0.4s ease-out; }
+    -webkit-animation: bounceFromLeft .4s ease-out;
+            animation: bounceFromLeft .4s ease-out; }
 
 @-webkit-keyframes bounceFromRight {
   0% {
@@ -126,8 +127,8 @@
   background-color: rgba(50, 50, 50, 0.5);
   color: #ddd;
   font: 1.6em sans-serif;
-  -webkit-transition: background-color 0.4s ease;
-          transition: background-color 0.4s ease; }
+  -webkit-transition: background-color .4s ease;
+  transition: background-color .4s ease; }
   .baguetteBox-button:hover {
     background-color: rgba(50, 50, 50, 0.9); }
   .baguetteBox-button#next-button {
@@ -169,8 +170,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  -webkit-animation: bounce 2s infinite ease-in-out;
-          animation: bounce 2s infinite ease-in-out; }
+  -webkit-animation: bounce 2.0s infinite ease-in-out;
+          animation: bounce 2.0s infinite ease-in-out; }
 
 .double-bounce2 {
   -webkit-animation-delay: -1.0s;

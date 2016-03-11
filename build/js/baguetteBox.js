@@ -1,7 +1,7 @@
 /*!
  * baguetteBox.js
  * @author  feimosi
- * @version 1.5.0
+ * @version %%INJECT_VERSION%%
  * @url https://github.com/feimosi/baguetteBox.js
  */
 
@@ -53,6 +53,7 @@
     var currentIndex = 0, currentGallery = -1;
     // Touch event start position (for slide gesture)
     var touchStartX;
+    var touchStartY;
     // If set to true ignore touch events because animation was already fired
     var touchFlag = false;
     // Regex pattern to match image files
@@ -86,8 +87,9 @@
         hideOverlay();
     };
     var touchstartHandler = function(event) {
-        // Save x axis position
+        // Save x and y axis position
         touchStartX = event.changedTouches[0].pageX;
+        touchStartY = event.changedTouches[0].pageY;
     };
     var touchmoveHandler = function(event) {
         // If action was already triggered return
@@ -103,6 +105,9 @@
         } else if (touch.pageX - touchStartX < -40) {
             touchFlag = true;
             showNextImage();
+        // Move 100 pixels up to close the overlay
+        } else if (touchStartY - touch.pageY > 100) {
+            hideOverlay();
         }
     };
     var touchendHandler = function(event) {
@@ -258,20 +263,31 @@
         if(currentGallery === galleryIndex)
             return;
         currentGallery = galleryIndex;
+        var currentImagesMap = imagesMap[galleryIndex];
         // Update gallery specific options
-        setOptions(imagesMap[galleryIndex].options);
+        setOptions(currentImagesMap.options);
         // Empty slider of previous contents (more effective than .innerHTML = "")
         while(slider.firstChild)
             slider.removeChild(slider.firstChild);
         imagesElements.length = 0;
         // Prepare and append images containers
-        for(var i = 0, fullImage; i < imagesMap[galleryIndex].length; i++) {
+        for(var i = 0, fullImage; i < currentImagesMap.length; i++) {
             fullImage = create('div');
             fullImage.className = 'full-image';
             fullImage.id = 'baguette-img-' + i;
             imagesElements.push(fullImage);
             slider.appendChild(imagesElements[i]);
         }
+
+        // set gallery specific buttons
+        if (currentImagesMap.options.previousButton !== undefined)
+            previousButton.innerHTML = currentImagesMap.options.previousButton;
+
+        if (currentImagesMap.options.nextButton !== undefined)
+            nextButton.innerHTML = currentImagesMap.options.nextButton;
+
+        if (currentImagesMap.options.closeButton !== undefined)
+            closeButton.innerHTML = currentImagesMap.options.closeButton;
     }
 
     function setOptions(newOptions) {

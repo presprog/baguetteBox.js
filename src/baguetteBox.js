@@ -263,20 +263,31 @@
         if(currentGallery === galleryIndex)
             return;
         currentGallery = galleryIndex;
+        var currentImagesMap = imagesMap[galleryIndex];
         // Update gallery specific options
-        setOptions(imagesMap[galleryIndex].options);
+        setOptions(currentImagesMap.options);
         // Empty slider of previous contents (more effective than .innerHTML = "")
         while(slider.firstChild)
             slider.removeChild(slider.firstChild);
         imagesElements.length = 0;
         // Prepare and append images containers
-        for(var i = 0, fullImage; i < imagesMap[galleryIndex].length; i++) {
+        for(var i = 0, fullImage; i < currentImagesMap.length; i++) {
             fullImage = create('div');
             fullImage.className = 'full-image';
             fullImage.id = 'baguette-img-' + i;
             imagesElements.push(fullImage);
             slider.appendChild(imagesElements[i]);
         }
+
+        // set gallery specific buttons
+        if (currentImagesMap.options.previousButton !== undefined)
+            previousButton.innerHTML = currentImagesMap.options.previousButton;
+
+        if (currentImagesMap.options.nextButton !== undefined)
+            nextButton.innerHTML = currentImagesMap.options.nextButton;
+
+        if (currentImagesMap.options.closeButton !== undefined)
+            closeButton.innerHTML = currentImagesMap.options.closeButton;
     }
 
     function setOptions(newOptions) {
